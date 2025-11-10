@@ -11,6 +11,7 @@ namespace Maze.Entities.Labyrinth
     {
         private readonly ILabyrinthGenerator _labyrinthGenerator;
 
+        private GeneratedLabyrinthData _generatedLabyrinthData;
         public LabyrinthPresenter(LabyrinthModel model, LabyrinthView view, ILabyrinthGenerator labyrinthGenerator) : base(model, view)
         {
             _labyrinthGenerator = labyrinthGenerator;
@@ -18,13 +19,14 @@ namespace Maze.Entities.Labyrinth
 
         public void Initialize()
         {
-            _labyrinthGenerator.GenerateMaze(
+            _generatedLabyrinthData = _labyrinthGenerator.GenerateMaze(
                 Model.Width,
                 Model.Height,
                 Model.Complexity,
                 Model.Density, 
                 Model.ExitCount);
-            View.DrawMaze(_labyrinthGenerator.Maze, _labyrinthGenerator.Exits);
+            
+            View.DrawMaze(_generatedLabyrinthData.Maze, _generatedLabyrinthData.Exits);
         }
     }
 }

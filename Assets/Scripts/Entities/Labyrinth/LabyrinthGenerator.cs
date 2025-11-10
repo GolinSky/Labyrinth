@@ -5,22 +5,37 @@ namespace Maze.Entities.Labyrinth
 {
     public interface ILabyrinthGenerator
     {
-        //todo: GenerateMaze must return maze data { maze, exits }
-        int[,] Maze { get; }
-        List<Vector2Int> Exits { get; }
+        
+        GeneratedLabyrinthData GenerateMaze(int width, int height, float complexity, float density, int exitCount);
+    }
 
-        void GenerateMaze(int width, int height, float complexity, float density, int exitCount);
+    public struct GeneratedLabyrinthData
+    {
+        public int[,] Maze { get; private set; }
+        public List<Vector2Int> Exits { get; private set;}
+
+        public GeneratedLabyrinthData(int[,] maze, List<Vector2Int> exits)
+        {
+            Maze = maze;
+            Exits = exits;
+        }
     }
     public class LabyrinthGenerator:ILabyrinthGenerator
     {
-        public int[,] Maze { get; private set; }
-        public List<Vector2Int> Exits { get; private set; } = new();
-        
+        private GeneratedLabyrinthData _generatedLabyrinthData;
+        private readonly List<Vector2Int> _exits = new();
+        private int[,] _maze;
 
-        public void GenerateMaze(int width, int height, float complexity, float density, int exitCount)
+        
+        public GeneratedLabyrinthData GenerateMaze(int width, int height, float complexity, float density, int exitCount)
         {
-            Maze = GenerateMazeInternal(width, height, complexity, density);
+            _maze = GenerateMazeInternal(width, height, complexity, density);
             PlaceExits(exitCount, height: height, width: width);
+            
+            _generatedLabyrinthData = new(_maze, _exits);
+            
+            
+            return _generatedLabyrinthData;
         }
         
         private int[,] GenerateMazeInternal(int width, int height, float complexity, float density)
@@ -82,13 +97,13 @@ namespace Maze.Entities.Labyrinth
         
         private void PlaceExits(int count, int height, int width)
         {
-            Exits.Clear();
+            _exits.Clear();
             System.Random rnd = new();
 
             HashSet<Vector2Int> usedPositions = new();
 
             int attempts = 0;
-            while (Exits.Count < count && attempts < 1000)
+            while (_exits.Count < count && attempts < 1000)
             {
                 attempts++;
 
@@ -100,7 +115,7 @@ namespace Maze.Entities.Labyrinth
 
                 // Ensure not overlapping or adjacent to another exit
                 bool tooClose = false;
-                foreach (var e in Exits)
+                foreach (var e in _exits)
                 {
                     if (Vector2Int.Distance(e, exitPos) < 2f)
                     {
@@ -118,10 +133,10 @@ namespace Maze.Entities.Labyrinth
 
                 Vector2Int inside = exitPos + inward;
                 if (inside.x < 0 || inside.y < 0 || inside.x >= width || inside.y >= height) continue;
-                if (Maze[inside.x, inside.y] != 1) continue; // ensure open passage
+                if (_maze[inside.x, inside.y] != 1) continue; // ensure open passage
 
-                Maze[exitPos.x, exitPos.y] = 1; // make sure exit cell is walkable
-                Exits.Add(exitPos);
+                _maze[exitPos.x, exitPos.y] = 1; // make sure exit cell is walkable
+                _exits.Add(exitPos);
                 usedPositions.Add(exitPos);
             }
         }
