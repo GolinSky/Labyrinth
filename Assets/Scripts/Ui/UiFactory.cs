@@ -1,12 +1,11 @@
-﻿using System;
-using Fps.MVP.Model;
+﻿using Mvp.Model;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using VContainer;
 using VContainer.Unity;
 using Exception = System.Exception;
 
-namespace Fps.Ui
+namespace Maze.Ui
 {
     public class UiFactory
     {

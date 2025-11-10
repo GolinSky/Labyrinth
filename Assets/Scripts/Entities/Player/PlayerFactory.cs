@@ -1,6 +1,5 @@
-﻿using Fps.MVP.Repository;
+﻿using Mvp.Repository;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using VContainer;
 using VContainer.Unity;
 

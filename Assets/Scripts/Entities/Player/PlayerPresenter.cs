@@ -1,4 +1,4 @@
-﻿using Fps.MVP.Presenter;
+﻿using Mvp.Presenter;
 using VContainer.Unity;
 
 namespace Maze.Entities.Player

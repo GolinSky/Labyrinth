@@ -1,5 +1,5 @@
 ﻿using System;
-using Fps.Ui;
+using Maze.Ui;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer.Unity;

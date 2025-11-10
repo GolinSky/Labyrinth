@@ -1,9 +1,9 @@
-using Fps.MVP.Repository;
-using Fps.Services.Coroutines;
-using Fps.Services.Game;
-using Fps.Services.Repository;
+using Maze.Services.Coroutines;
+using Maze.Services.Game;
+using Maze.Services.Repository;
 using Maze.Services.Scenes;
 using Maze.VContainer.Utility;
+using Mvp.Repository;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

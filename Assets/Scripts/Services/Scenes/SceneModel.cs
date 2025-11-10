@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Fps.MVP.Model;
+using Mvp.Model;
 using UnityEngine;
 
 namespace Maze.Services.Scenes

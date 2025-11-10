@@ -1,5 +1,5 @@
-using Fps.Services.Game;
 using Maze.Entities.Player;
+using Maze.Services.Game;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

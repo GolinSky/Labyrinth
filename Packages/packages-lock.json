@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "949e5898845e66bd6047031f594e8068e65d3467"
+      "hash": "a3c9791c8c01887f787f939b99380656f5c9ee5c"
     },
     "com.script-utils.editor-serialization": {
       "version": "https://github.com/GolinSky/ScriptUtilities.git?path=/Assets/ScriptUtils/EditorSerialization",

@@ -1,4 +1,5 @@
-﻿using Fps.MVP.Model;
+﻿
+using Mvp.Model;
 using UnityEngine;
 
 namespace Maze.Entities.Player

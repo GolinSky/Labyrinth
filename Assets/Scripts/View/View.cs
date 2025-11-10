@@ -1,6 +1,6 @@
-﻿using Fps.MVP.Model;
-using Fps.MVP.Presenter;
-using Fps.MVP.Views;
+﻿using Mvp.Model;
+using Mvp.Presenter;
+using Mvp.Views;
 using UnityEngine;
 using UnityEngine.Assertions;
 

@@ -1,11 +1,8 @@
 ﻿using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using VContainer;
-using VContainer.Unity;
 
-namespace Fps.Ui
+namespace Maze.Ui
 {
     public interface IUiService
     {

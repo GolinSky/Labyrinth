@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Fps.Services.Coroutines
+namespace Maze.Services.Coroutines
 {
     public interface ICoroutineService
     {

@@ -1,8 +1,8 @@
-﻿using Fps.MVP.Components;
-using Fps.MVP.Model;
+﻿using Mvp.Components;
+using Mvp.Model;
 using VContainer;
 
-namespace Components
+namespace Maze.Components
 {
     public class Component<TModel> : Component 
         where TModel : Model

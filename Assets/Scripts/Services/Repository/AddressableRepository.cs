@@ -1,8 +1,8 @@
-﻿using Fps.MVP.Repository;
+﻿using Mvp.Repository;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Fps.Services.Repository
+namespace Maze.Services.Repository
 {
     public class AddressableRepository:IRepository
     {

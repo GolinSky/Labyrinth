@@ -1,9 +1,8 @@
-﻿using Fps.MVP.Services;
-using Maze.Services.Scenes;
-using UnityEngine;
+﻿using Maze.Services.Scenes;
+using Mvp.Services;
 using VContainer.Unity;
 
-namespace Fps.Services.Game
+namespace Maze.Services.Game
 {
     public interface IGameService: IService
     {

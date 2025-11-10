@@ -1,9 +1,9 @@
-﻿using Fps.MVP.Services;
-using Maze.Entities.Player;
+﻿using Maze.Entities.Player;
+using Mvp.Services;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace Fps.Services.Game
+namespace Maze.Services.Game
 {
     public class CoreGameService:Service, IInitializable
     {

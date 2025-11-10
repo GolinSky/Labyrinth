@@ -1,4 +1,4 @@
-﻿using Fps.Ui;
+﻿using Maze.Ui;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

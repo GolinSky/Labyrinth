@@ -1,7 +1,7 @@
-﻿using Fps.MVP.Presenter;
-using Fps.MVP.Services;
-using Fps.Services.Game;
-using Fps.Ui;
+﻿using Maze.Services.Game;
+using Maze.Ui;
+using Mvp.Presenter;
+using Mvp.Services;
 using VContainer.Unity;
 
 namespace Maze.Entities.MainMenu

@@ -1,6 +1,6 @@
 ﻿using System;
-using Fps.MVP.Services;
-using Fps.Services.Coroutines;
+using Maze.Services.Coroutines;
+using Mvp.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

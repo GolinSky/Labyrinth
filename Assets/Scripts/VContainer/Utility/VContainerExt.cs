@@ -1,4 +1,4 @@
-﻿using Fps.Services.Repository;
+﻿using Maze.Services.Repository;
 using UnityEngine;
 using VContainer;
 

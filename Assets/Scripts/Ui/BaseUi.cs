@@ -1,7 +1,7 @@
-﻿using Fps.MVP.Presenter;
+﻿using Mvp.Presenter;
 using UnityEngine;
 
-namespace Fps.Ui
+namespace Maze.Ui
 {
     public interface IBaseUi
     {
