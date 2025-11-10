@@ -16,7 +16,7 @@ namespace Maze.VContainer
         
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<CoreGameService>(Lifetime.Singleton);
+            // builder.Register<CoreGameService>(Lifetime.Singleton).AsImplementedInterfaces();
             // builder.Register<InputService>(Lifetime.Singleton).AsImplementedInterfaces();
 
             builder.RegisterComponent(cameraService).As<ICameraService>();

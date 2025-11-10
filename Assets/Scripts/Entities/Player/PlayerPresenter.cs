@@ -1,4 +1,6 @@
-﻿using Maze.Services.Labyrinth;
+﻿using System;
+using Maze.Services.Game;
+using Maze.Services.Labyrinth;
 using Mvp.Presenter;
 using UnityEngine;
 using Utilities.ScriptUtils.Time;
@@ -10,33 +12,44 @@ namespace Maze.Entities.Player
     {
         
     }
-    public class PlayerPresenter: Presenter<PlayerModel, PlayerView>, IPlayerPresenter, IInitializable, ITickable
+    public class PlayerPresenter: Presenter<PlayerModel, PlayerView>, IPlayerPresenter, IInitializable, ITickable, Services.Game.IObserver<CoreGameState>, IDisposable
     {
         private readonly ILabyrinthService _labyrinthService;
+        private readonly ICoreGameNotifier _coreGameNotifier;
         private Vector2Int _currentCell;
         private readonly ITimer _moveTimer;
-        public PlayerPresenter(PlayerModel model, PlayerView view, ILabyrinthService labyrinthService) : base(model, view)
+        private CoreGameState _gameState;
+
+        public PlayerPresenter(
+            PlayerModel model,
+            PlayerView view,
+            ILabyrinthService labyrinthService,
+            ICoreGameNotifier coreGameNotifier) : base(model, view)
         {
             _labyrinthService = labyrinthService;
+            _coreGameNotifier = coreGameNotifier;
             _moveTimer = TimerFactory.ConstructTimer(0.1f);
         }
 
         public void Initialize()
         {
+            _coreGameNotifier.AddObserver(this);
             // Start at maze center
             Vector2Int startCell = new Vector2Int(_labyrinthService.Width / 2, _labyrinthService.Height / 2);
             
             _currentCell = _labyrinthService.FindNearestFloor(startCell);
             SetPosition();
         }
-
-        private void SetPosition()
+        
+        public void Dispose()
         {
-            View.SetPosition(_labyrinthService.GetNearestWalkableCell(_currentCell));
-        }
+            _coreGameNotifier.RemoveObserver(this);
 
+        }
+        
         public void Tick()
         {
+            if(_gameState != CoreGameState.GameIdle) return;
             if(!_moveTimer.IsComplete) return;
             
             Vector2Int direction = Vector2Int.zero;
@@ -57,10 +70,21 @@ namespace Maze.Entities.Player
                  
                     if (_labyrinthService.IsExit(_currentCell))
                     {
+                        _coreGameNotifier.Notify(CoreGameState.GameEnd);
                         Debug.Log("🎉 You found the exit!");
                     }
                 }
             }
+        }
+
+        public void Notify(CoreGameState gameState)
+        {
+            _gameState = gameState;
+        }
+        
+        private void SetPosition()
+        {
+            View.SetPosition(_labyrinthService.GetNearestWalkableCell(_currentCell));
         }
     }
 }
