@@ -20,12 +20,12 @@ namespace Maze.Entities.Labyrinth
             Exits = exits;
         }
     }
-    public class LabyrinthGenerator:ILabyrinthGenerator
+
+    public class LabyrinthGenerator : ILabyrinthGenerator
     {
         private GeneratedLabyrinthData _generatedLabyrinthData;
         private readonly List<Vector2Int> _exits = new();
         private int[,] _maze;
-
         
         public GeneratedLabyrinthData GenerateMaze(int width, int height, float complexity, float density, int exitCount)
         {
@@ -42,9 +42,9 @@ namespace Maze.Entities.Labyrinth
         {
             int[,] maze = new int[width, height];
 
-            // Ensure odd dimensions for perfect maze
-            if (width % 2 == 0) width--;
-            if (height % 2 == 0) height--;
+            // // Ensure odd dimensions for perfect maze
+            // if (width % 2 == 0) width--;
+            // if (height % 2 == 0) height--;
 
             Stack<Vector2Int> stack = new();
             Vector2Int start = new(width / 2, height / 2);
@@ -125,18 +125,42 @@ namespace Maze.Entities.Labyrinth
                 }
                 if (tooClose) continue;
 
-                // Check that adjacent inside cell is walkable
+                // // Check that adjacent inside cell is walkable
+                // Vector2Int inward = new(
+                //     x == 0 ? 1 : (x == width - 1 ? -1 : 0),
+                //     y == 0 ? 1 : (y == height - 1 ? -1 : 0)
+                // );
+                //
+                // Vector2Int inside = exitPos + inward;
+                // if (inside.x < 0 || inside.y < 0 || inside.x >= width || inside.y >= height) continue;
+                // if (_maze[inside.x, inside.y] != 1) continue; // ensure open passage
+
                 Vector2Int inward = new(
                     x == 0 ? 1 : (x == width - 1 ? -1 : 0),
                     y == 0 ? 1 : (y == height - 1 ? -1 : 0)
                 );
 
                 Vector2Int inside = exitPos + inward;
-                if (inside.x < 0 || inside.y < 0 || inside.x >= width || inside.y >= height) continue;
-                if (_maze[inside.x, inside.y] != 1) continue; // ensure open passage
 
-                _maze[exitPos.x, exitPos.y] = 1; // make sure exit cell is walkable
+// 🧠 Look inward up to 2 cells to find walkable corridor
+                bool foundPassage = false;
+                for (int i = 1; i <= 2; i++)
+                {
+                    Vector2Int check = exitPos + inward * i;
+                    if (check.x >= 0 && check.y >= 0 && check.x < width && check.y < height && _maze[check.x, check.y] == 1)
+                    {
+                        inside = check;
+                        foundPassage = true;
+                        break;
+                    }
+                }
+                if (!foundPassage) continue;
+
+// carve to make sure connected
+                _maze[inside.x - inward.x, inside.y - inward.y] = 1;
+                _maze[exitPos.x, exitPos.y] = 1;
                 _exits.Add(exitPos);
+           
                 usedPositions.Add(exitPos);
             }
         }
