@@ -3,6 +3,7 @@ using Mvp.Presenter;
 using Mvp.Views;
 using UnityEngine;
 using UnityEngine.Assertions;
+using VContainer;
 
 namespace Maze.View
 {
@@ -14,10 +15,10 @@ namespace Maze.View
         
         protected TPresenter Presenter { get; private set; }
 
-        public IModelObserver ModelObserver => null;// Model;
+        public IModelObserver ModelObserver => Model;
         
-        // [Inject]
-        // protected TModel Model { get; private set; }
+        [Inject]
+        protected TModel Model { get; private set; }
 
 
         public void AssignPresenter(IPresenter presenter)
