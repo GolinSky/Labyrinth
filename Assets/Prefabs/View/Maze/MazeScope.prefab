@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Maze.Entities.Labyrinth.LabyrinthLifeTimeScope
   parentReference:
-    TypeName: 
+    TypeName: Maze.VContainer.CoreLifeTimeScope
   autoRun: 1
   autoInjectGameObjects: []
   labyrinthView: {fileID: 5900760578444087779}

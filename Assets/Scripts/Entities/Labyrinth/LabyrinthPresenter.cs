@@ -1,4 +1,6 @@
-﻿using Mvp.Presenter;
+﻿using Maze.Services.Labyrinth;
+using Mvp.Presenter;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace Maze.Entities.Labyrinth
@@ -7,12 +9,19 @@ namespace Maze.Entities.Labyrinth
     {
         
     }
-    public class LabyrinthPresenter: Presenter<LabyrinthModel, LabyrinthView>, ILabyrinthPresenter, IInitializable
+    
+    public class LabyrinthPresenter: Presenter<LabyrinthModel, LabyrinthView>, ILabyrinthPresenter, IInitializable, ILabyrinthProvider
     {
         private readonly ILabyrinthGenerator _labyrinthGenerator;
-
         private GeneratedLabyrinthData _generatedLabyrinthData;
-        public LabyrinthPresenter(LabyrinthModel model, LabyrinthView view, ILabyrinthGenerator labyrinthGenerator) : base(model, view)
+
+        public int Width => Model.Width;
+        public int Height => Model.Height;
+        
+        public LabyrinthPresenter(
+            LabyrinthModel model,
+            LabyrinthView view,
+            ILabyrinthGenerator labyrinthGenerator) : base(model, view)
         {
             _labyrinthGenerator = labyrinthGenerator;
         }
@@ -27,6 +36,46 @@ namespace Maze.Entities.Labyrinth
                 Model.ExitCount);
             
             View.DrawMaze(_generatedLabyrinthData.Maze, _generatedLabyrinthData.Exits);
+        }
+        
+        public bool IsExit(Vector2Int cell)
+        {
+            return _generatedLabyrinthData.Exits.Contains(cell);
+        }
+
+        public Vector3 GetNearestWalkableCell(Vector2Int from)
+        {
+            Vector2Int currentCell = FindNearestFloor(from);
+
+            Vector3 cellCenter = View.GetCellCenterWorld(new Vector3Int(currentCell.x, currentCell.y, 0));
+            return cellCenter;
+        }
+        
+
+        public bool IsWalkable(Vector2Int cell)
+        {
+            if (cell.x < 0 || cell.y < 0 || cell.x >= Model.Width || cell.y >= Model.Height) return false;
+            return _generatedLabyrinthData.Maze[cell.x, cell.y] == 1;
+        }
+        
+        private Vector2Int FindNearestFloor(Vector2Int center)
+        {
+            if (IsWalkable(center))
+                return center;
+
+            int maxRadius = Mathf.Max(Model.Width, Model.Height);
+            for (int r = 1; r < maxRadius; r++)
+            {
+                for (int dx = -r; dx <= r; dx++)
+                for (int dy = -r; dy <= r; dy++)
+                {
+                    Vector2Int check = new(center.x + dx, center.y + dy);
+                    if (IsWalkable(check))
+                        return check;
+                }
+            }
+
+            return center;
         }
     }
 }

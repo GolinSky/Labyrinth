@@ -1,25 +1,20 @@
-﻿using Mvp.Repository;
+﻿using Maze.VContainer.Factory;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace Maze.Entities.Player
 {
-    public class PlayerFactory
+    public sealed class PlayerFactory: BaseFactory
     {
-        private readonly LifetimeScope _rootScope;
-        
-        public PlayerFactory(IObjectResolver resolver)
+        public PlayerFactory(IObjectResolver resolver): base(resolver)
         {
-            _rootScope = resolver.Resolve<LifetimeScope>();
         }
         
         public void CreatePlayer(Vector3 startPosition)
         {
-            IRepository repository = _rootScope.Container.Resolve<IRepository>();
-            PlayerLifetimeScope scopePrefab = repository.LoadComponent<PlayerLifetimeScope>(nameof(PlayerLifetimeScope));
+            PlayerLifetimeScope scopePrefab = Repository.LoadComponent<PlayerLifetimeScope>(nameof(PlayerLifetimeScope));
 
-            _rootScope.CreateChildFromPrefab(scopePrefab, builder =>
+            RootScope.CreateChildFromPrefab(scopePrefab, builder =>
             {
                 builder.RegisterInstance(startPosition);
             });

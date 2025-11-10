@@ -41,5 +41,10 @@ namespace Maze.Entities.Labyrinth
                 floorMap.SetTile(new Vector3Int(exit.x, exit.y, 0), exitTile);
             }
         }
+
+        public Vector3 GetCellCenterWorld(Vector3Int vector3Int)// bad code
+        {
+            return floorMap.GetCellCenterWorld(vector3Int);
+        }
     }
 }

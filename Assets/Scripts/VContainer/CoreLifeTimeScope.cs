@@ -1,5 +1,8 @@
+using Maze.Entities.Labyrinth;
 using Maze.Entities.Player;
+using Maze.Services.CameraService;
 using Maze.Services.Game;
+using Maze.Services.Labyrinth;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -9,24 +12,19 @@ namespace Maze.VContainer
     public class CoreLifeTimeScope: LifetimeScope
     {
       
-        [SerializeField] private Camera mainCamera;
-       
+        [SerializeField] private CameraService cameraService;
         
         protected override void Configure(IContainerBuilder builder)
         {
             builder.Register<CoreGameService>(Lifetime.Singleton);
             // builder.Register<InputService>(Lifetime.Singleton).AsImplementedInterfaces();
-           
-            builder.RegisterInstance(mainCamera);
+
+            builder.RegisterComponent(cameraService).As<ICameraService>();
+
+            builder.Register<LabyrinthFactory>(Lifetime.Scoped);
+            builder.Register<LabyrinthService>(Lifetime.Singleton).AsSelf().As<ILabyrinthService>();
             
-            // builder.RegisterFactory<PlayerView>(() =>
-            // {
-            //     var repository = Container.Resolve<IRepository>();
-            //     var prefab = repository.LoadComponent<PlayerLifetimeScope>(nameof(PlayerView));
-            //     var childScope = CreateChildFromPrefab(prefab);
-            //     return childScope.Container.Resolve<PlayerView>(); // Execute per factory invocation
-            // });
-            //
+    
 
             builder.Register<PlayerFactory>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
             
