@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.script-utils.time": "https://github.com/GolinSky/ScriptUtilities.git?path=/Assets/ScriptUtils/Time",
     "com.script-utils.editor-serialization": "https://github.com/GolinSky/ScriptUtilities.git?path=/Assets/ScriptUtils/EditorSerialization",
     "com.mvp-template": "https://github.com/GolinSky/MvpTemplate.git?path=/Assets/Mvp",
     "com.unity.2d.animation": "12.0.2",

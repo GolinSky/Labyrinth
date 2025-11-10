@@ -9,6 +9,7 @@ namespace Maze.Services.Labyrinth
         bool IsWalkable(Vector2Int cell);
         bool IsExit(Vector2Int cell);
         Vector3 GetNearestWalkableCell(Vector2Int from);
+        Vector2Int FindNearestFloor(Vector2Int center);
         int Width { get; }
         int Height { get; }
     }
@@ -20,7 +21,9 @@ namespace Maze.Services.Labyrinth
     public class LabyrinthService: Service, ILabyrinthService
     {
         private readonly LabyrinthFactory _labyrinthFactory;
-        private ILabyrinthProvider _labyrinthProvider;
+        private readonly ILabyrinthProvider _labyrinthProvider;
+     
+
         public int Width => _labyrinthProvider.Width;
         public int Height => _labyrinthProvider.Height;
 
@@ -29,6 +32,11 @@ namespace Maze.Services.Labyrinth
         {
             _labyrinthFactory = labyrinthFactory;
             _labyrinthProvider = labyrinthFactory.CreateLabyrinth();
+        }
+        
+        public Vector2Int FindNearestFloor(Vector2Int center)
+        {
+            return _labyrinthProvider.FindNearestFloor(center);
         }
         
         public bool IsWalkable(Vector2Int cell)

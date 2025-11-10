@@ -58,7 +58,7 @@ namespace Maze.Entities.Labyrinth
             return _generatedLabyrinthData.Maze[cell.x, cell.y] == 1;
         }
         
-        private Vector2Int FindNearestFloor(Vector2Int center)
+        public Vector2Int FindNearestFloor(Vector2Int center)
         {
             if (IsWalkable(center))
                 return center;
