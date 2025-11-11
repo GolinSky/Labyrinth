@@ -12,9 +12,7 @@ namespace Maze.VContainer
         protected override void Configure(IContainerBuilder builder)
         {
             builder.Register<UiFactory>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-
             builder.RegisterComponent(uiService).As<IUiService>();
-
         }
     }
 }

@@ -15,12 +15,11 @@ namespace Maze.Entities.Player
         public bool IsMoving { get; set; }
         
         public float TimeSpent { get; set; }
-        
+        public float MoveDelay { get; }
+
         public PlayerModel(PlayerData playerData)
         {
-            
+            MoveDelay = playerData.MoveDelay;
         }
-
-       
     }
 }

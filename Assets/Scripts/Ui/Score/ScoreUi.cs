@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Maze.Services.MainMenu;
 using Maze.Services.Score;
-using Maze.Ui;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer.Unity;
 
-namespace Maze.Services.MainMenu
+namespace Maze.Ui.Score
 {
     public class ScoreUi: PresenterBasedUi<IScorePresenter>, IInitializable, IDisposable
     {

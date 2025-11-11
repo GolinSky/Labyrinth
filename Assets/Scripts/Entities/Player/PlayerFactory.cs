@@ -1,5 +1,4 @@
 ﻿using Maze.VContainer.Factory;
-using UnityEngine;
 using VContainer;
 
 namespace Maze.Entities.Player
@@ -10,14 +9,10 @@ namespace Maze.Entities.Player
         {
         }
         
-        public void CreatePlayer(Vector3 startPosition)
+        public void CreatePlayer()
         {
             PlayerLifetimeScope scopePrefab = Repository.LoadComponent<PlayerLifetimeScope>(nameof(PlayerLifetimeScope));
-
-            RootScope.CreateChildFromPrefab(scopePrefab, builder =>
-            {
-                builder.RegisterInstance(startPosition);
-            });
+            RootScope.CreateChildFromPrefab(scopePrefab);
         }
     }
 }

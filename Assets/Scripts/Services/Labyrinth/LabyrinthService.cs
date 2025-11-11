@@ -51,8 +51,5 @@ namespace Maze.Services.Labyrinth
         {
             return _labyrinthProvider.GetNearestWalkableCell(from);
         }
-        
-    
-        
     }
 }

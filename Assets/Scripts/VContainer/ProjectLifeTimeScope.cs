@@ -20,7 +20,6 @@ namespace Maze.VContainer
         {
             builder.Register<SceneService>(Lifetime.Singleton).As<ISceneService>();
             builder.RegisterScriptableObject<SceneData>();
-
             builder.Register<SceneModel>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.RegisterInstance(coroutineService).As<ICoroutineService>();
             builder.Register<GameService>(Lifetime.Singleton);

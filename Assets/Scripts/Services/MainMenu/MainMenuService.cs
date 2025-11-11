@@ -1,6 +1,7 @@
 ﻿using Maze.Services.Game;
 using Maze.Services.Score;
 using Maze.Ui;
+using Maze.Ui.Score;
 using Mvp.Presenter;
 using Mvp.Services;
 using VContainer.Unity;

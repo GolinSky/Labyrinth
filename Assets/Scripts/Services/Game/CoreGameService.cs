@@ -78,7 +78,7 @@ namespace Maze.Services.Game
         {
             _mazeSetUpUi.Hide();
             _labyrinthService.ConstructMaze(labyrinthContext);
-            _playerFactory.CreatePlayer(Vector3.zero);
+            _playerFactory.CreatePlayer();
             _cameraService.SetUpCamera(_labyrinthService);
             Notify(CoreGameState.GameStarted);
             Notify(CoreGameState.GameIdle);

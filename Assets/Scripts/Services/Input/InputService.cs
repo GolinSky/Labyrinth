@@ -8,7 +8,8 @@ namespace Maze.Services.Input
     {
         Vector2 Move { get; }
     }
-    public class InputService: Service, IDisposable, IInputService
+
+    public class InputService : Service, IDisposable, IInputService
     {
         private readonly CoreInputActions _actions;
 

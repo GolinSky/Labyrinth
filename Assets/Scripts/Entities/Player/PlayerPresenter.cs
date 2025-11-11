@@ -38,7 +38,7 @@ namespace Maze.Entities.Player
             _coreGameNotifier = coreGameNotifier;
             _uiService = uiService;
             _inputService = inputService;
-            _moveTimer = TimerFactory.ConstructTimer(0.1f);
+            _moveTimer = TimerFactory.ConstructTimer(Model.MoveDelay);
         }
 
         public void Initialize()

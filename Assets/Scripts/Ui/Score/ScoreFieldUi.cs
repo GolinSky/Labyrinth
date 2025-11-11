@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Maze.Services.MainMenu
+namespace Maze.Ui.Score
 {
     public class ScoreFieldUi: MonoBehaviour
     {

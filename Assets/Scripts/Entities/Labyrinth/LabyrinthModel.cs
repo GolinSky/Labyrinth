@@ -1,5 +1,4 @@
-﻿
-using Mvp.Model;
+﻿using Mvp.Model;
 
 namespace Maze.Entities.Labyrinth
 {

@@ -13,8 +13,6 @@ namespace Maze.Entities.Player
         {
             _resolver = Parent.Container;
             IRepository repository = _resolver.Resolve<IRepository>();
-            // Vector3 startPosition = _resolver.Resolve<Vector3>();
-            // builder.RegisterInstance(startPosition);
             
             builder.RegisterScriptableObject<PlayerData>();
             builder.Register<PlayerModel>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
