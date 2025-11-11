@@ -3,7 +3,6 @@ using Maze.Entities.Labyrinth;
 using Maze.Entities.Player;
 using Maze.Services.CameraService;
 using Maze.Services.Labyrinth;
-using Maze.Services.Score;
 using Maze.Ui;
 using Maze.Ui.EndGame;
 using Maze.Ui.MazeSetUp;
