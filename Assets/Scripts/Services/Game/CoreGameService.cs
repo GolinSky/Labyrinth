@@ -3,6 +3,7 @@ using Maze.Entities.Labyrinth;
 using Maze.Entities.Player;
 using Maze.Services.CameraService;
 using Maze.Services.Labyrinth;
+using Maze.Services.Score;
 using Maze.Ui;
 using Maze.Ui.EndGame;
 using Maze.Ui.MazeSetUp;
@@ -26,6 +27,7 @@ namespace Maze.Services.Game
         private readonly ICameraService _cameraService;
         private readonly ILabyrinthService _labyrinthService;
         private readonly IUiService _uiService;
+        private readonly ScoreService _scoreService;
         private readonly IGameService _gameService;
 
         private readonly List<IObserver<CoreGameState>> _observers = new();
@@ -36,13 +38,15 @@ namespace Maze.Services.Game
             PlayerFactory playerFactory,
             ICameraService cameraService,
             ILabyrinthService labyrinthService,
-            IUiService uiService)
+            IUiService uiService,
+            ScoreService scoreService)
         {
             _gameService = gameService;
             _playerFactory = playerFactory;
             _cameraService = cameraService;
             _labyrinthService = labyrinthService;
             _uiService = uiService;
+            _scoreService = scoreService;
         }
         
         public void Initialize()
@@ -67,6 +71,7 @@ namespace Maze.Services.Game
             EndGameUi endGameUi = _uiService.CreatePresenterBasedUi<EndGameUi, ICoreGamePresenter>(this);
             endGameUi.SetData(playerModel.Steps, playerModel.TimeSpent);
             endGameUi.Show();
+            _scoreService.SaveScore(matchDuration: playerModel.TimeSpent, steps: playerModel.Steps);
         }
         
         public void StartGame(ILabyrinthContext labyrinthContext)
