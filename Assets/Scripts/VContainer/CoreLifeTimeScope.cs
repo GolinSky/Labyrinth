@@ -2,6 +2,7 @@ using Maze.Entities.Labyrinth;
 using Maze.Entities.Player;
 using Maze.Services.CameraService;
 using Maze.Services.Game;
+using Maze.Services.Input;
 using Maze.Services.Labyrinth;
 using UnityEngine;
 using VContainer;
@@ -15,16 +16,10 @@ namespace Maze.VContainer
         
         protected override void Configure(IContainerBuilder builder)
         {
-            // builder.Register<CoreGameService>(Lifetime.Singleton).AsImplementedInterfaces();
-            // builder.Register<InputService>(Lifetime.Singleton).AsImplementedInterfaces();
-
             builder.RegisterComponent(cameraService).As<ICameraService>();
-
+            builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
             builder.Register<LabyrinthFactory>(Lifetime.Scoped);
             builder.Register<LabyrinthService>(Lifetime.Singleton).AsSelf().As<ILabyrinthService>();
-            
-    
-
             builder.Register<PlayerFactory>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
             
             builder.UseEntryPoints(Lifetime.Singleton, pointsBuilder =>

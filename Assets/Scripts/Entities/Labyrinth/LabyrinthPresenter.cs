@@ -56,7 +56,6 @@ namespace Maze.Entities.Labyrinth
             Vector3 worldCoordinates = View.GetCellCenterWorld(new Vector3Int(from.x, from.y, 0));
             return worldCoordinates;
         }
-        
 
         public bool IsWalkable(Vector2Int cell)
         {

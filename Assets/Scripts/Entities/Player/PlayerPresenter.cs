@@ -1,5 +1,6 @@
 ﻿using System;
 using Maze.Services.Game;
+using Maze.Services.Input;
 using Maze.Services.Labyrinth;
 using Maze.Ui;
 using Mvp.Presenter;
@@ -18,6 +19,7 @@ namespace Maze.Entities.Player
         private readonly ILabyrinthService _labyrinthService;
         private readonly ICoreGameNotifier _coreGameNotifier;
         private readonly IUiService _uiService;
+        private readonly IInputService _inputService;
         private Vector2Int _currentCell;
         private readonly ITimer _moveTimer;
         private CoreGameState _gameState;
@@ -29,11 +31,13 @@ namespace Maze.Entities.Player
             PlayerView view,
             ILabyrinthService labyrinthService,
             ICoreGameNotifier coreGameNotifier,
-            IUiService uiService) : base(model, view)
+            IUiService uiService,
+            IInputService inputService) : base(model, view)
         {
             _labyrinthService = labyrinthService;
             _coreGameNotifier = coreGameNotifier;
             _uiService = uiService;
+            _inputService = inputService;
             _moveTimer = TimerFactory.ConstructTimer(0.1f);
         }
 
@@ -67,11 +71,13 @@ namespace Maze.Entities.Player
 
             if(!_moveTimer.IsComplete) return;
             
+            Vector2 input = _inputService.Move;
             Vector2Int direction = Vector2Int.zero;
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) direction = Vector2Int.up;
-            else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) direction = Vector2Int.down;
-            else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) direction = Vector2Int.left;
-            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) direction = Vector2Int.right;
+
+            if (input.y > 0.5f) direction = Vector2Int.up;
+            else if (input.y < -0.5f) direction = Vector2Int.down;
+            else if (input.x < -0.5f) direction = Vector2Int.left;
+            else if (input.x > 0.5f) direction = Vector2Int.right;
 
             Model.IsMoving = direction != Vector2Int.zero;
             if (!Model.IsMoving) return;
