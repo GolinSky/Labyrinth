@@ -8,6 +8,7 @@ namespace Maze.Services.CameraService
     {
         void SetUpCamera(ILabyrinthService labyrinthService);
     }
+    
     public class CameraService: MonoBehaviour, ICameraService
     {
         private const float MARGIN = 1f;
@@ -21,7 +22,7 @@ namespace Maze.Services.CameraService
             float centerX = (labyrinthService.Width - 1) / 2f;
             float centerY = (labyrinthService.Height - 1) / 2f;
 
-            Vector3 mazeCenter = labyrinthService.GetNearestWalkableCell(new Vector2Int((int)centerX, (int)centerY));
+            Vector3 mazeCenter = labyrinthService.GetWorldCoordinates(new Vector2Int((int)centerX, (int)centerY));
             mazeCenter.z = Z_OFFSET;
             targetCamera.transform.position = mazeCenter;
             

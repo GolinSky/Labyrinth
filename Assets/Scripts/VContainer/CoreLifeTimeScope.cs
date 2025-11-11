@@ -11,7 +11,6 @@ namespace Maze.VContainer
 {
     public class CoreLifeTimeScope: LifetimeScope
     {
-      
         [SerializeField] private CameraService cameraService;
         
         protected override void Configure(IContainerBuilder builder)

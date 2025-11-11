@@ -31,7 +31,12 @@ namespace Maze.Services.Labyrinth
         {
             return _labyrinthProvider.FindNearestFloor(center);
         }
-        
+
+        public Vector3 GetWorldCoordinates(Vector2Int from)
+        {
+            return _labyrinthProvider.GetWorldCoordinates(from);
+        }
+
         public bool IsWalkable(Vector2Int cell)
         {
            return _labyrinthProvider.IsWalkable(cell);

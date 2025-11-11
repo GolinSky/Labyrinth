@@ -10,7 +10,7 @@ namespace Maze.Entities.Labyrinth
         
     }
     
-    public class LabyrinthPresenter: Presenter<LabyrinthModel, LabyrinthView>, ILabyrinthPresenter, IInitializable, ILabyrinthProvider
+    public class LabyrinthPresenter: Presenter<LabyrinthModel, LabyrinthView>, ILabyrinthPresenter, IInitializable, ILabyrinthProvider//, ITickable
     {
         private readonly ILabyrinthGenerator _labyrinthGenerator;
         private GeneratedLabyrinthData _generatedLabyrinthData;
@@ -51,6 +51,12 @@ namespace Maze.Entities.Labyrinth
             return cellCenter;
         }
         
+        public Vector3 GetWorldCoordinates(Vector2Int from)
+        {
+            Vector3 worldCoordinates = View.GetCellCenterWorld(new Vector3Int(from.x, from.y, 0));
+            return worldCoordinates;
+        }
+        
 
         public bool IsWalkable(Vector2Int cell)
         {
@@ -77,5 +83,20 @@ namespace Maze.Entities.Labyrinth
 
             return center;
         }
+
+        // public void Tick()
+        // {
+        //     if (Input.GetKeyDown(KeyCode.Space))
+        //     {
+        //         _generatedLabyrinthData = _labyrinthGenerator.GenerateMaze(
+        //             Model.Width,
+        //             Model.Height,
+        //             Model.Complexity,
+        //             Model.Density, 
+        //             Model.ExitCount);
+        //     
+        //         View.DrawMaze(_generatedLabyrinthData.Maze, _generatedLabyrinthData.Exits);
+        //     }
+        // }
     }
 }

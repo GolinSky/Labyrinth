@@ -10,5 +10,6 @@ namespace Maze.Services.Labyrinth
         bool IsExit(Vector2Int cell);
         Vector3 GetNearestWalkableCell(Vector2Int from);
         Vector2Int FindNearestFloor(Vector2Int center);
+        Vector3 GetWorldCoordinates(Vector2Int from);
     }
 }
