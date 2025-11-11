@@ -6,7 +6,7 @@ using VContainer.Unity;
 
 namespace Maze.Ui.MazeSetUp
 {
-    public class MazeSetUpUi: BaseUi<ICoreGamePresenter>, IInitializable, ILabyrinthContext
+    public class MazeSetUpUi: PresenterBasedUi<ICoreGamePresenter>, IInitializable, ILabyrinthContext
     {
         //todo: store constrains in maze data instead 
         private const float MIN_WIDTH = 3;
@@ -48,14 +48,7 @@ namespace Maze.Ui.MazeSetUp
 
         private void StartGame()
         {
-            if (Presenter == null)
-            {
-                Debug.LogError($"Presenter is null in {nameof(MazeSetUpUi)}");
-            }
-            else
-            {
-                Presenter.StartGame(this);
-            }
+            Presenter.StartGame(this);
         }
     }
 }

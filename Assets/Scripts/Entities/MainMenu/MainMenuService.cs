@@ -18,7 +18,6 @@ namespace Maze.Entities.MainMenu
         private readonly IGameService _gameService;
         private MainMenuUi _mainMenuUi;
         
-        
         public MainMenuService(IUiService uiService, IGameService gameService) 
         {
             _uiService = uiService;
@@ -27,8 +26,7 @@ namespace Maze.Entities.MainMenu
 
         public void Start()
         {
-            _mainMenuUi = _uiService.CreateUi<MainMenuUi>();
-            _mainMenuUi.AssignPresenter(this);
+            _mainMenuUi = _uiService.CreatePresenterBasedUi<MainMenuUi, IMainMenuPresenter>(this);
             _mainMenuUi.Show();
         }
 

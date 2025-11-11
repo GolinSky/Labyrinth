@@ -47,8 +47,7 @@ namespace Maze.Services.Game
         
         public void Initialize()
         {
-            _mazeSetUpUi = _uiService.CreateUi<MazeSetUpUi>();
-            _mazeSetUpUi.AssignPresenter(this); 
+            _mazeSetUpUi = _uiService.CreatePresenterBasedUi<MazeSetUpUi, ICoreGamePresenter>(this);
             _mazeSetUpUi.Show();
         }
 
@@ -65,8 +64,7 @@ namespace Maze.Services.Game
         public void NotifyEndGame(IPlayerModelObserver playerModel)
         {
             Notify(CoreGameState.GameEnd);
-            EndGameUi endGameUi = _uiService.CreateUi<EndGameUi>();
-            endGameUi.AssignPresenter(this);
+            EndGameUi endGameUi = _uiService.CreatePresenterBasedUi<EndGameUi, ICoreGamePresenter>(this);
             endGameUi.SetData(playerModel.Steps, playerModel.TimeSpent);
             endGameUi.Show();
         }

@@ -33,20 +33,12 @@ namespace Maze.Ui
         }
     }
     
-
-    public abstract class BaseUi<TPresenter> : BaseUi
+    
+    public abstract class PresenterBasedUi<TPresenter> : BaseUi
         where TPresenter : IPresenter
     {
-       protected TPresenter Presenter { get; private set; }
-
-
-       public void AssignPresenter(TPresenter presenter)
-       {
-           Presenter = presenter;
-           OnPresenterAssigned();
-       }
-
-       protected virtual void OnPresenterAssigned(){}
+        [Inject]
+        protected TPresenter Presenter { get; private set; }
     }
     
     public abstract class ModelBasedUi<TModel> : BaseUi
