@@ -2,31 +2,38 @@
 using Maze.Entities.Player;
 using Maze.Services.CameraService;
 using Maze.Services.Labyrinth;
+using Maze.Ui;
+using Maze.Ui.EndGame;
+using Mvp.Presenter;
 using Mvp.Services;
 using UnityEngine;
 using VContainer.Unity;
 
 namespace Maze.Services.Game
 {
-    public interface ICoreGameNotifier
+    public interface ICoreGamePresenter: IPresenter
     {
-        void AddObserver(IObserver<CoreGameState> observer);
-        void RemoveObserver(IObserver<CoreGameState> observer);
-        void Notify(CoreGameState state);
+        
     }
-    
-    public class CoreGameService : Service, IInitializable, ICoreGameNotifier
+
+    public class CoreGameService : Service, IInitializable, ICoreGameNotifier, ICoreGamePresenter
     {
         private readonly PlayerFactory _playerFactory;
         private readonly ICameraService _cameraService;
         private readonly ILabyrinthService _labyrinthService;
-    
+        private readonly IUiService _uiService;
+
         private readonly List<IObserver<CoreGameState>> _observers = new();
-        public CoreGameService(PlayerFactory playerFactory, ICameraService cameraService, ILabyrinthService labyrinthService)
+        public CoreGameService(
+            PlayerFactory playerFactory,
+            ICameraService cameraService,
+            ILabyrinthService labyrinthService,
+            IUiService uiService)
         {
             _playerFactory = playerFactory;
             _cameraService = cameraService;
             _labyrinthService = labyrinthService;
+            _uiService = uiService;
         }
         
         public void Initialize()
@@ -46,13 +53,25 @@ namespace Maze.Services.Game
         {
             _observers.Remove(observer);
         }
+        
+        public void NotifyEndGame(IPlayerModelObserver playerModel)
+        {
+            Notify(CoreGameState.GameEnd);
+            EndGameUi endGameUi = _uiService.CreateUi<EndGameUi>();
+            endGameUi.SetData(playerModel.Steps, playerModel.TimeSpent);
+            endGameUi.Show();
+        }
 
-        public void Notify(CoreGameState state)
+        private void Notify(CoreGameState state)
         {
             for (var i = 0; i < _observers.Count; i++)
             {
                 _observers[i].Notify(state);
             }
+
+           
         }
+
+
     }
 }

@@ -15,6 +15,16 @@ MonoBehaviour:
   m_GroupName: Ui
   m_GUID: 697e00426e26de64ca84e666df1094bc
   m_SerializeEntries:
+  - m_GUID: 1623155a4b8ddac489363cc271c0562c
+    m_Address: PlayerUi
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99261b5bc1957d84e9b3a39c4fa9b114
+    m_Address: EndGameUi
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: eacb4cf5837958549bcbbbc274f1679b
     m_Address: MainMenuUi
     m_ReadOnly: 0

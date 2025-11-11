@@ -1,5 +1,7 @@
-﻿using Mvp.Presenter;
+﻿using Mvp.Model;
+using Mvp.Presenter;
 using UnityEngine;
+using VContainer;
 
 namespace Maze.Ui
 {
@@ -42,5 +44,12 @@ namespace Maze.Ui
        {
            Presenter = presenter;
        }
+    }
+    
+    public abstract class ModelBasedUi<TModel> : BaseUi
+        where TModel : IModelObserver
+    {
+        [Inject]
+        protected TModel Model { get; private set; }
     }
 }
