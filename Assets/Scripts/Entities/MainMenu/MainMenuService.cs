@@ -9,6 +9,7 @@ namespace Maze.Entities.MainMenu
     public interface IMainMenuPresenter : IPresenter
     {
         void StartGame();
+        void ExitGame();
     }
     
     public class MainMenuService: Service, IStartable, IMainMenuPresenter
@@ -34,6 +35,11 @@ namespace Maze.Entities.MainMenu
         public void StartGame()
         {
             _gameService.StartGame();
+        }
+
+        public void ExitGame()
+        {
+            _gameService.ExitGame();
         }
     }
 }

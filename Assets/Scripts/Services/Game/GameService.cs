@@ -1,15 +1,16 @@
 ﻿using Maze.Services.Scenes;
 using Mvp.Services;
-using VContainer.Unity;
+using UnityEngine;
 
 namespace Maze.Services.Game
 {
     public interface IGameService: IService
     {
         void StartGame();
+        void ExitGame();
     }
     
-    public class GameService: Service, IInitializable, IGameService
+    public class GameService: Service, IGameService
     {
         private readonly ISceneService _sceneService;
 
@@ -18,14 +19,14 @@ namespace Maze.Services.Game
             _sceneService = sceneService;
         }
 
-        public void Initialize()
-        {
-            // _sceneService.LoadScene(SceneType.MainMenu);
-        }
-
         public void StartGame()
         {
             _sceneService.LoadScene(SceneType.Core);
+        }
+
+        public void ExitGame()
+        {
+            Application.Quit();
         }
     }
 }

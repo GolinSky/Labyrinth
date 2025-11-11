@@ -3278,7 +3278,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 1
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3367,9 +3367,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6830872030220644144}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 50
   m_WholeNumbers: 1
-  m_Value: 0
+  m_Value: 20
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3638,6 +3638,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6945832242492824836}
     m_Modifications:
+    - target: {fileID: 442937981533359707, guid: 6c46061986212174e8586b30f683b8d2, type: 3}
+      propertyPath: m_Value
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 442937981533359707, guid: 6c46061986212174e8586b30f683b8d2, type: 3}
+      propertyPath: m_MaxValue
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 442937981533359707, guid: 6c46061986212174e8586b30f683b8d2, type: 3}
+      propertyPath: m_MinValue
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 442937981533359707, guid: 6c46061986212174e8586b30f683b8d2, type: 3}
       propertyPath: m_Navigation.m_Mode
       value: 0

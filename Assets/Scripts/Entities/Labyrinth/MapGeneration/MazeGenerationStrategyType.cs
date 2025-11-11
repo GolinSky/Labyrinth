@@ -5,8 +5,7 @@ namespace Maze.Entities.Labyrinth
     [Serializable]
     public enum MazeGenerationStrategyType
     {
-        Kruskal = 0,// not sure it is dfs
+        Kruskal = 0,// not sure if it is dfs
         Prim = 1,
-        
     }
 }
