@@ -43,7 +43,10 @@ namespace Maze.Ui
        public void AssignPresenter(TPresenter presenter)
        {
            Presenter = presenter;
+           OnPresenterAssigned();
        }
+
+       protected virtual void OnPresenterAssigned(){}
     }
     
     public abstract class ModelBasedUi<TModel> : BaseUi

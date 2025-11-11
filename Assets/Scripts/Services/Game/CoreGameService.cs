@@ -16,6 +16,8 @@ namespace Maze.Services.Game
     public interface ICoreGamePresenter: IPresenter
     {
         void StartGame(ILabyrinthContext labyrinthContext);
+        void RestartGame();
+        void ExitGame();
     }
 
     public class CoreGameService : Service, IInitializable, ICoreGameNotifier, ICoreGamePresenter
@@ -24,16 +26,19 @@ namespace Maze.Services.Game
         private readonly ICameraService _cameraService;
         private readonly ILabyrinthService _labyrinthService;
         private readonly IUiService _uiService;
+        private readonly IGameService _gameService;
 
         private readonly List<IObserver<CoreGameState>> _observers = new();
         private MazeSetUpUi _mazeSetUpUi;
 
         public CoreGameService(
+            IGameService gameService,
             PlayerFactory playerFactory,
             ICameraService cameraService,
             ILabyrinthService labyrinthService,
             IUiService uiService)
         {
+            _gameService = gameService;
             _playerFactory = playerFactory;
             _cameraService = cameraService;
             _labyrinthService = labyrinthService;
@@ -61,16 +66,9 @@ namespace Maze.Services.Game
         {
             Notify(CoreGameState.GameEnd);
             EndGameUi endGameUi = _uiService.CreateUi<EndGameUi>();
+            endGameUi.AssignPresenter(this);
             endGameUi.SetData(playerModel.Steps, playerModel.TimeSpent);
             endGameUi.Show();
-        }
-
-        private void Notify(CoreGameState state)
-        {
-            for (var i = 0; i < _observers.Count; i++)
-            {
-                _observers[i].Notify(state);
-            }
         }
         
         public void StartGame(ILabyrinthContext labyrinthContext)
@@ -81,6 +79,24 @@ namespace Maze.Services.Game
             _cameraService.SetUpCamera(_labyrinthService);
             Notify(CoreGameState.GameStarted);
             Notify(CoreGameState.GameIdle);
+        }
+
+        public void RestartGame()
+        {
+            _gameService.RestartCoreGame();
+        }
+
+        public void ExitGame()
+        {
+            _gameService.LoadMenu();
+        }
+        
+        private void Notify(CoreGameState state)
+        {
+            for (var i = 0; i < _observers.Count; i++)
+            {
+                _observers[i].Notify(state);
+            }
         }
     }
 }

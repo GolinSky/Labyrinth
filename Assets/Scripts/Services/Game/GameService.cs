@@ -8,6 +8,8 @@ namespace Maze.Services.Game
     {
         void StartGame();
         void ExitGame();
+        void RestartCoreGame();
+        void LoadMenu();
     }
     
     public class GameService: Service, IGameService
@@ -21,12 +23,27 @@ namespace Maze.Services.Game
 
         public void StartGame()
         {
-            _sceneService.LoadScene(SceneType.Core);
+            LoadCoreGame();
         }
 
         public void ExitGame()
         {
             Application.Quit();
+        }
+
+        public void RestartCoreGame()
+        {
+            LoadCoreGame();
+        }
+
+        public void LoadMenu()
+        {
+            _sceneService.LoadScene(SceneType.MainMenu);
+        }
+
+        private void LoadCoreGame()
+        {
+            _sceneService.LoadScene(SceneType.Core);
         }
     }
 }

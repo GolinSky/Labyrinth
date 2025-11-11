@@ -26,6 +26,7 @@ namespace Maze.Ui
             UIFactory = uiFactory;
         }
 
+        //todo: refactor - inject presenter as model in overload method
         public TUI CreateUi<TUI>(Transform uiParent = null) where TUI : IBaseUi
         {
             TUI uiInstance = UIFactory.CreateUi<TUI>(uiParent ?? this.parent);
