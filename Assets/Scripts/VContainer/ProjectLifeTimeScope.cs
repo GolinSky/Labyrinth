@@ -3,6 +3,7 @@ using Maze.Services.Game;
 using Maze.Services.Repository;
 using Maze.Services.Save;
 using Maze.Services.Scenes;
+using Maze.Services.Score;
 using Maze.VContainer.Utility;
 using Mvp.Repository;
 using UnityEngine;

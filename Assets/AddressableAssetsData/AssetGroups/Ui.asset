@@ -30,6 +30,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c1a7141488fa7c4eaa1a96708eacb7c
+    m_Address: ScoreUi
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: eacb4cf5837958549bcbbbc274f1679b
     m_Address: MainMenuUi
     m_ReadOnly: 0

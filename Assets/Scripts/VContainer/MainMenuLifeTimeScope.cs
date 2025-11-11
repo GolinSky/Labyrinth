@@ -1,4 +1,4 @@
-﻿using Maze.Entities.MainMenu;
+﻿using Maze.Services.MainMenu;
 using VContainer;
 using VContainer.Unity;
 
