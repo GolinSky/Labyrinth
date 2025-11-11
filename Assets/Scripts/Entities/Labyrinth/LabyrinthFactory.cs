@@ -16,7 +16,7 @@ namespace Maze.Entities.Labyrinth
             LabyrinthLifeTimeScope scopePrefab = Repository.LoadComponent<LabyrinthLifeTimeScope>(nameof(LabyrinthLifeTimeScope));
             var scope = RootScope.CreateChildFromPrefab(scopePrefab, builder =>
             {
-                builder.RegisterScriptableObject<LabyrinthData>().As<ILabyrinthContext>();
+                builder.RegisterScriptableObject<LabyrinthData>().As<ILabyrinthContext>().As<IGenerationContext>();
    
             });
             return scope.Container.Resolve<ILabyrinthProvider>();
@@ -28,6 +28,7 @@ namespace Maze.Entities.Labyrinth
             var scope = RootScope.CreateChildFromPrefab(scopePrefab, builder =>
             {
                 builder.RegisterInstance(labyrinthContext);
+                builder.RegisterScriptableObject<LabyrinthData>().As<IGenerationContext>();
             });
             return scope.Container.Resolve<ILabyrinthProvider>();
         }
