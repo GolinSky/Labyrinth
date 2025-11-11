@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b227b4f41976f2419e443489e60a808
+    m_Address: MazeSetUpUi
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 99261b5bc1957d84e9b3a39c4fa9b114
     m_Address: EndGameUi
     m_ReadOnly: 0

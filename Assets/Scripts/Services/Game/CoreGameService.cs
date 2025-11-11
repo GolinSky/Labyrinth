@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using Maze.Entities.Labyrinth;
 using Maze.Entities.Player;
 using Maze.Services.CameraService;
 using Maze.Services.Labyrinth;
 using Maze.Ui;
 using Maze.Ui.EndGame;
+using Maze.Ui.MazeSetUp;
 using Mvp.Presenter;
 using Mvp.Services;
 using UnityEngine;
@@ -13,7 +15,7 @@ namespace Maze.Services.Game
 {
     public interface ICoreGamePresenter: IPresenter
     {
-        
+        void StartGame(ILabyrinthContext labyrinthContext);
     }
 
     public class CoreGameService : Service, IInitializable, ICoreGameNotifier, ICoreGamePresenter
@@ -24,6 +26,8 @@ namespace Maze.Services.Game
         private readonly IUiService _uiService;
 
         private readonly List<IObserver<CoreGameState>> _observers = new();
+        private MazeSetUpUi _mazeSetUpUi;
+
         public CoreGameService(
             PlayerFactory playerFactory,
             ICameraService cameraService,
@@ -38,10 +42,9 @@ namespace Maze.Services.Game
         
         public void Initialize()
         {
-            _playerFactory.CreatePlayer(Vector3.zero);
-            _cameraService.SetUpCamera(_labyrinthService);
-            Notify(CoreGameState.GameStarted);
-            Notify(CoreGameState.GameIdle);
+            _mazeSetUpUi = _uiService.CreateUi<MazeSetUpUi>();
+            _mazeSetUpUi.AssignPresenter(this); 
+            _mazeSetUpUi.Show();
         }
 
         public void AddObserver(IObserver<CoreGameState> observer)
@@ -68,10 +71,16 @@ namespace Maze.Services.Game
             {
                 _observers[i].Notify(state);
             }
-
-           
         }
-
-
+        
+        public void StartGame(ILabyrinthContext labyrinthContext)
+        {
+            _mazeSetUpUi.Hide();
+            _labyrinthService.ConstructMaze(labyrinthContext);
+            _playerFactory.CreatePlayer(Vector3.zero);
+            _cameraService.SetUpCamera(_labyrinthService);
+            Notify(CoreGameState.GameStarted);
+            Notify(CoreGameState.GameIdle);
+        }
     }
 }

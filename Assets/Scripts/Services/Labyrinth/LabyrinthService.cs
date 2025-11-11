@@ -4,34 +4,27 @@ using UnityEngine;
 
 namespace Maze.Services.Labyrinth
 {
-    public interface ILabyrinthProvider
+    public interface ILabyrinthService : IService, ILabyrinthProvider
     {
-        bool IsWalkable(Vector2Int cell);
-        bool IsExit(Vector2Int cell);
-        Vector3 GetNearestWalkableCell(Vector2Int from);
-        Vector2Int FindNearestFloor(Vector2Int center);
-        int Width { get; }
-        int Height { get; }
+        void ConstructMaze(ILabyrinthContext labyrinthContext);
     }
     
-    public interface ILabyrinthService: IService,ILabyrinthProvider
-    {
-      //set data from ui - dynamic data - width height exits count etc...
-    }
     public class LabyrinthService: Service, ILabyrinthService
     {
         private readonly LabyrinthFactory _labyrinthFactory;
-        private readonly ILabyrinthProvider _labyrinthProvider;
-     
-
+        private ILabyrinthProvider _labyrinthProvider;
+        
         public int Width => _labyrinthProvider.Width;
         public int Height => _labyrinthProvider.Height;
-
-
+        
         public LabyrinthService(LabyrinthFactory labyrinthFactory)
         {
             _labyrinthFactory = labyrinthFactory;
-            _labyrinthProvider = labyrinthFactory.CreateLabyrinth();
+        }
+ 
+        public void ConstructMaze(ILabyrinthContext labyrinthContext)
+        {
+            _labyrinthProvider = _labyrinthFactory.CreateLabyrinth(labyrinthContext);
         }
         
         public Vector2Int FindNearestFloor(Vector2Int center)

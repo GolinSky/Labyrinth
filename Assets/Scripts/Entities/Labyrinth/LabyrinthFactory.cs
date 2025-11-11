@@ -1,5 +1,6 @@
 ﻿using Maze.Services.Labyrinth;
 using Maze.VContainer.Factory;
+using Maze.VContainer.Utility;
 using VContainer;
 
 namespace Maze.Entities.Labyrinth
@@ -13,7 +14,21 @@ namespace Maze.Entities.Labyrinth
         public ILabyrinthProvider CreateLabyrinth()
         {
             LabyrinthLifeTimeScope scopePrefab = Repository.LoadComponent<LabyrinthLifeTimeScope>(nameof(LabyrinthLifeTimeScope));
-            var scope = RootScope.CreateChildFromPrefab(scopePrefab);
+            var scope = RootScope.CreateChildFromPrefab(scopePrefab, builder =>
+            {
+                builder.RegisterScriptableObject<LabyrinthData>().As<ILabyrinthContext>();
+   
+            });
+            return scope.Container.Resolve<ILabyrinthProvider>();
+        }
+
+        public ILabyrinthProvider CreateLabyrinth(ILabyrinthContext labyrinthContext)
+        {
+            LabyrinthLifeTimeScope scopePrefab = Repository.LoadComponent<LabyrinthLifeTimeScope>(nameof(LabyrinthLifeTimeScope));
+            var scope = RootScope.CreateChildFromPrefab(scopePrefab, builder =>
+            {
+                builder.RegisterInstance(labyrinthContext);
+            });
             return scope.Container.Resolve<ILabyrinthProvider>();
         }
     }

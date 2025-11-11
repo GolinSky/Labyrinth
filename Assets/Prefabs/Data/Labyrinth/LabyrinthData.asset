@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d2006e681f4c54aed8323400942aee, type: 3}
   m_Name: LabyrinthData
   m_EditorClassIdentifier: Assembly-CSharp::Maze.Entities.Labyrinth.LabyrinthData
-  <Width>k__BackingField: 21
-  <Height>k__BackingField: 21
+  <Width>k__BackingField: 33
+  <Height>k__BackingField: 33
   <ExitCount>k__BackingField: 3
   <Complexity>k__BackingField: 0.7
   <Density>k__BackingField: 0.7
