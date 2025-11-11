@@ -3,24 +3,7 @@ using UnityEngine;
 
 namespace Maze.Entities.Labyrinth
 {
-    public interface ILabyrinthGenerator
-    {
-        
-        GeneratedLabyrinthData GenerateMaze(int width, int height, float complexity, float density, int exitCount);
-    }
-
-    public struct GeneratedLabyrinthData
-    {
-        public int[,] Maze { get; private set; }
-        public List<Vector2Int> Exits { get; private set;}
-
-        public GeneratedLabyrinthData(int[,] maze, List<Vector2Int> exits)
-        {
-            Maze = maze;
-            Exits = exits;
-        }
-    }
-
+    //dfs like alg
     public class LabyrinthGenerator : ILabyrinthGenerator
     {
         private GeneratedLabyrinthData _generatedLabyrinthData;
@@ -31,10 +14,7 @@ namespace Maze.Entities.Labyrinth
         {
             _maze = GenerateMazeInternal(width, height, complexity, density);
             PlaceExits(exitCount, height: height, width: width);
-            
             _generatedLabyrinthData = new(_maze, _exits);
-            
-            
             return _generatedLabyrinthData;
         }
         
